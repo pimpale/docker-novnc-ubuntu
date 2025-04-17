@@ -1,4 +1,4 @@
-FROM debian:bullseye
+FROM ubuntu:24.04
 
 # Install git, supervisor, VNC, & X11 packages
 RUN set -ex; \
@@ -12,7 +12,10 @@ RUN set -ex; \
       supervisor \
       x11vnc \
       xterm \
-      xvfb
+      xvfb 
+# install python3 and pip
+RUN apt-get install -y python3 python3-pip python3-dev python3-tk gnome-screenshot
+RUN python3 -m pip config set global.break-system-packages true
 
 # Setup demo environment variables
 ENV HOME=/root \
